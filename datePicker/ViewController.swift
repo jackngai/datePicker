@@ -19,11 +19,14 @@ class ViewController: UIViewController {
     }()
     
     
-    @IBOutlet weak var textField: UITextField!
+    let textField = UITextField()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         textField.inputView = datePicker
+        
+        setupViews()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,6 +46,26 @@ class ViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+    
+    func setupViews(){
+        
+        view.backgroundColor = .white
+        textField.backgroundColor = .gray
+        textField.placeholder = "Tap here to pick a date"
+        textField.textAlignment = .center
+        
+        view.addSubview(textField)
+        
+        textField.translatesAutoresizingMaskIntoConstraints = false
+    
+        textField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        textField.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        textField.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        
+        
     }
 }
 
