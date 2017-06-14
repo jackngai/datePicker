@@ -10,9 +10,20 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.datePickerMode = UIDatePickerMode.dateAndTime
+        
+        picker.addTarget(self, action: #selector(datePickerValueChanged(sender:)), for: .valueChanged)
+        return picker
+    }()
+    
+    
+    @IBOutlet weak var textField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        textField.inputView = datePicker
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +31,18 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    func datePickerValueChanged(sender: UIDatePicker) {
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = DateFormatter.Style.short
+        formatter.timeStyle = DateFormatter.Style.short
+        
+        textField.text = formatter.string(from: sender.date)
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 }
 
